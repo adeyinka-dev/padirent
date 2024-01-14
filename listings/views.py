@@ -1,16 +1,23 @@
 from rest_framework import generics, permissions
 
 from .models import Listing
+from .permissions import IsAgentOrReadOnly
 from .serializers import ListingSerializer
 
 
-class Listings(generics.ListCreateAPIView):
+class ListingsView(generics.ListAPIView):
     permission_classes = (permissions.AllowAny,)
     queryset = Listing.objects.all()
     serializer_class = ListingSerializer
 
 
+class Listings(generics.ListCreateAPIView):
+    permission_classes = (IsAgentOrReadOnly,)
+    queryset = Listing.objects.all()
+    serializer_class = ListingSerializer
+
+
 class ListingDetails(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (IsAgentOrReadOnly,)
     queryset = Listing.objects.all()
     serializer_class = ListingSerializer
