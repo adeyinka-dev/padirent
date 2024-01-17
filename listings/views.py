@@ -6,7 +6,6 @@ from .serializers import ListingSerializer
 
 
 class ListingsView(generics.ListAPIView):
-    permission_classes = (permissions.AllowAny,)
     queryset = Listing.objects.all()
     serializer_class = ListingSerializer
 
