@@ -1,8 +1,11 @@
 from django.urls import path
-from .views import ListingDetails, Listings, ListingsView
+from rest_framework.routers import SimpleRouter
 
-urlpatterns = [
-    path("<int:pk>/", ListingDetails.as_view(), name="listing_detail"),
-    path("", Listings.as_view(), name="listings"),
-    path("listings/", ListingsView.as_view(), name="listings_list"),
-]
+from .views import ListingViewSet, AgentViewSet
+
+
+router = SimpleRouter()
+router.register("agents", AgentViewSet, basename="agents")
+router.register("", ListingViewSet, basename="listings")
+
+urlpatterns = router.urls
