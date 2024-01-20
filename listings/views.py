@@ -8,18 +8,19 @@ from .serializers import ListingSerializer, UserSerializer
 
 
 class ListingViewSet(viewsets.ModelViewSet):
+    permission_classes = [AllowAny]
     queryset = Listing.objects.all()
     serializer_class = ListingSerializer
 
     # If user is not authenticated, remove modification from view
-    def get_permissions(self):
-        if self.action in ["create"]:
-            permission_classes = [AllowAny]
-        if self.action in ["list", "retrieve"]:
-            permission_classes = [IsAuthenticatedOrReadOnly]
-        else:
-            permission_classes = [IsAgentOrReadOnly]
-        return [permission() for permission in permission_classes]
+    # def get_permissions(self):
+    #     if self.action in ["create"]:
+    #         permission_classes = [AllowAny]
+    #     if self.action in ["list", "retrieve"]:
+    #         permission_classes = [AllowAny]
+    #     else:
+    #         permission_classes = [AllowAny]
+    #     return [permission() for permission in permission_classes]
 
 
 class AgentViewSet(viewsets.ModelViewSet):

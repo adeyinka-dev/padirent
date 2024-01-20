@@ -61,12 +61,12 @@ INSTALLED_APPS = [
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.IsAuthenticated",
+        "rest_framework.permissions.AllowAny",
     ],
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.SessionAuthentication",
-        "rest_framework.authentication.TokenAuthentication",
-    ],
+    # "DEFAULT_AUTHENTICATION_CLASSES": [
+    #     "rest_framework.authentication.SessionAuthentication",
+    #     "rest_framework.authentication.TokenAuthentication",
+    # ],
 }
 
 MIDDLEWARE = [
@@ -127,17 +127,17 @@ CLOUDINARY_STORAGE = {
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
 
 
-# import dj_database_url
+import dj_database_url
 
-# DATABASES = {"default": dj_database_url.parse(env.str("DB_URL"))}
+DATABASES = {"default": dj_database_url.parse(env.str("DB_URL"))}
 
 
 # Password validation
