@@ -8,7 +8,7 @@ class Listing(models.Model):
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     location = models.CharField(max_length=250)
-    image = models.ImageField(upload_to="images/", blank=True)
+    images = models.ImageField(upload_to="images/", blank=True)
     added_on = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     status = models.CharField(

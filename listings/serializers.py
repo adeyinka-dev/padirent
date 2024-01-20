@@ -11,7 +11,7 @@ class ListingSerializer(serializers.ModelSerializer):
             "description",
             "price",
             "location",
-            "image",
+            "images",
             "added_on",
             "updated_at",
             "status",
