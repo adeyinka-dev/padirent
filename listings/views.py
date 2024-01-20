@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from rest_framework import viewsets
-from rest_framework.permissions import IsAdminUser, IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAdminUser, IsAuthenticatedOrReadOnly, AllowAny
 
 from .models import Listing
 from .permissions import IsAgentOrReadOnly
@@ -13,6 +13,8 @@ class ListingViewSet(viewsets.ModelViewSet):
 
     # If user is not authenticated, remove modification from view
     def get_permissions(self):
+        if self.action in ["create"]:
+            permission_classes = [AllowAny]
         if self.action in ["list", "retrieve"]:
             permission_classes = [IsAuthenticatedOrReadOnly]
         else:
